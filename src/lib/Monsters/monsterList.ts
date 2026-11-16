@@ -15,7 +15,9 @@ export const monsterTiers: MonsterTier[] = [
 				defense: 2,
 				ability: 'Burn',
 				health: 5,
-				imageUrl: '/MonsterImages/1-RedSlime.png'
+				imageUrl: '/MonsterImages/1-RedSlime.png',
+				magic: 0,
+				rewardGold: 0
 			},
 			{
 				name: 'Orange Slime',
@@ -23,7 +25,9 @@ export const monsterTiers: MonsterTier[] = [
 				defense: 1,
 				ability: 'Double Strike',
 				health: 4,
-				imageUrl: '/MonsterImages/2-OrangeSlime.png'
+				imageUrl: '/MonsterImages/2-OrangeSlime.png',
+				magic: 0,
+				rewardGold: 0
 			}
 		]
 	},
@@ -36,7 +40,9 @@ export const monsterTiers: MonsterTier[] = [
 				defense: 3,
 				ability: 'Block',
 				health: 10,
-				imageUrl: '/MonsterImages/2-PurpleSlime.png'
+				imageUrl: '/MonsterImages/2-PurpleSlime.png',
+				magic: 0,
+				rewardGold: 0
 			}
 		]
 	}

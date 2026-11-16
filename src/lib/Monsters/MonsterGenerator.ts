@@ -12,7 +12,8 @@ function mulberry32(seed: number) {
 }
 
 export function MonsterGenerator(date: Date): Monster[] {
-	const seed = date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
+	const seed =
+		date.getUTCFullYear() * 10000 + (date.getUTCMonth() + 1) * 100 + date.getUTCDate();
 	const rand = mulberry32(seed);
 
 	const tierOne = monsterTiers.find((t) => t.tier === 1)?.monsters ?? [];

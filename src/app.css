@@ -1,5 +1,122 @@
 @import 'tailwindcss';
 
+@property --animated-border-angle {
+	syntax: '<angle>';
+	inherits: false;
+	initial-value: 0deg;
+}
+
 .metal-mania {
-  font-family: 'Metal Mania', cursive;
+	font-family: 'Metal Mania', cursive;
+}
+
+.animated-border {
+	position: relative;
+	isolation: isolate;
+}
+
+.animated-border::before {
+	position: absolute;
+	z-index: 2;
+	inset: 0;
+	padding: 2px;
+	border-radius: inherit;
+	background: conic-gradient(
+		from var(--animated-border-angle),
+		transparent 0deg 230deg,
+		#fdba74 250deg,
+		#fff7ed 270deg,
+		#f97316 290deg,
+		transparent 315deg 360deg
+	);
+	content: '';
+	opacity: 0;
+	pointer-events: none;
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	mask-composite: exclude;
+}
+
+.animated-border:hover::before,
+.animated-border:focus-visible::before {
+	opacity: 1;
+	animation: animated-border-spin 0.75s linear infinite;
+}
+
+.animated-border:focus-visible {
+	outline: 2px solid #fff7ed;
+	outline-offset: 4px;
+}
+
+.combat-message-overlay {
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	z-index: 1;
+	max-width: 90%;
+	padding: 0.2rem 0.75rem;
+	transform: translate(-50%, -50%);
+	border: 1px solid #fed7aa;
+	border-radius: 0.25rem;
+	background: rgb(8 47 73 / 85%);
+	color: #fff7ed;
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-align: center;
+	text-shadow: 0 1px 5px #000;
+	white-space: normal;
+	pointer-events: none;
+	animation: combat-message-scroll 1.6s ease-out forwards;
+}
+
+@keyframes animated-border-spin {
+	to {
+		--animated-border-angle: -1turn;
+	}
+}
+
+@keyframes combat-message-scroll {
+	0% {
+		top: 75%;
+		opacity: 0;
+	}
+	12% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+	100% {
+		top: 25%;
+		opacity: 0;
+	}
+}
+
+@keyframes combat-message-fade {
+	0%,
+	100% {
+		opacity: 0;
+	}
+	15%,
+	80% {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animated-border:hover::before,
+	.animated-border:focus-visible::before {
+		animation: none;
+	}
+
+	.combat-message-overlay {
+		top: 50%;
+		left: 50%;
+		animation-name: combat-message-fade;
+	}
 }

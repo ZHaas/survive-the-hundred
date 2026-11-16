@@ -3,10 +3,9 @@
 	import { onMount } from 'svelte';
 	import Gem from 'lucide-svelte/icons/Gem';
 	import FlaskCanonical from 'lucide-svelte/icons/flask-conical';
-	export let totalGold: number = 0;
-	export let healthPots: number = 0;
+	import { gameState } from '$lib/Stores/gameStats.svelte.js';
 
-	let show = false;
+	let show = $state(false);
 
 	onMount(() => {
 		show = true;
@@ -17,11 +16,11 @@
 	{#if show}
 		<span in:fly={{ y: -60, duration: 400, delay: 20 }} class="flex items-center">
 			<Gem size={36} class="text-orange-200" />
-			<span class="ml-3 text-4xl text-orange-200">= {totalGold}</span>
+			<span class="ml-3 text-4xl text-orange-200">= {gameState.inventory.gold}</span>
 		</span>
 		<span in:fly={{ y: -60, duration: 400, delay: 120 }} class="ml-6 flex items-center">
 			<FlaskCanonical size={36} class="text-orange-200" />
-			<span class="ml-3 text-4xl text-orange-200">= {healthPots}</span>
+			<span class="ml-3 text-4xl text-orange-200">= {gameState.inventory.healthPotions}</span>
 		</span>
 	{/if}
 </div>

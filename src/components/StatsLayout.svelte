@@ -5,15 +5,11 @@
 	import Sparkles from 'lucide-svelte/icons/Sparkles';
 	import { fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { gameState } from '$lib/Stores/gameStats.svelte.js';
 
-	export let attackValue: number = 0;
-	export let defenseValue: number = 0;
-	export let healthValue: number = 100;
-	export let magicAttackValue: number = 0;
-	export let magicDefenseValue: number = 0;
-	export let isMonster: boolean = false;
+	let { isMonster = false } = $props<{ isMonster?: boolean }>();
 
-	let show = false;
+	let show = $state(false);
 
 	onMount(() => {
 		show = true;
@@ -24,20 +20,22 @@
 	{#if show}
 		<span in:fly={{ y: -60, duration: 400, delay: 20 }} class="flex items-center">
 			<HeartPulse size={36} class="text-orange-200" />
-			<span class="ml-3 text-4xl text-orange-200">= {healthValue}</span>
+			<span class="ml-3 text-4xl text-orange-200">
+				= {isMonster ? (gameState.monster?.health ?? 0) : gameState.player.health}
+			</span>
 		</span>
 		{#if !isMonster}
 			<span in:fly={{ y: -60, duration: 400, delay: 120 }} class="ml-6 flex items-center">
 				<Swords size={36} class="text-orange-200" />
-				<span class="ml-3 text-4xl text-orange-200">= {attackValue}</span>
+				<span class="ml-3 text-4xl text-orange-200">= {gameState.player.attack}</span>
 			</span>
 			<span in:fly={{ y: -60, duration: 400, delay: 240 }} class="ml-6 flex items-center">
 				<ShieldPlus size={36} class="text-orange-200" />
-				<span class="ml-3 text-4xl text-orange-200">= {defenseValue}</span>
+				<span class="ml-3 text-4xl text-orange-200">= {gameState.player.defense}</span>
 			</span>
 			<span in:fly={{ y: -60, duration: 400, delay: 360 }} class="ml-6 flex items-center">
 				<Sparkles size={36} class="text-orange-200" />
-				<span class="ml-3 text-4xl text-orange-200">= {magicAttackValue}</span>
+				<span class="ml-3 text-4xl text-orange-200">= {gameState.player.magicPower}</span>
 			</span>
 			<span in:fly={{ y: -60, duration: 400, delay: 480 }} class="ml-6 flex items-center">
 				<svg
@@ -69,6 +67,6 @@
 						stroke-linecap="round"
 					/>
 				</svg>
-				<span class="ml-3 text-4xl text-orange-200">= {magicDefenseValue}</span>
+				<span class="ml-3 text-4xl text-orange-200">= {gameState.player.magicDefense}</span>
 			</span>{/if}{/if}
 </div>

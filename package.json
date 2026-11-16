@@ -2,7 +2,8 @@
 	"name": "survive-the-hundred",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --open",
+		"dev:debug": "vite dev --host 127.0.0.1 --strictPort",
 		"build": "vite build && npm run prepack",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -59,11 +60,6 @@
 	"keywords": [
 		"svelte"
 	],
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
-	},
 	"dependencies": {
 		"lucide-svelte": "^0.523.0"
 	}

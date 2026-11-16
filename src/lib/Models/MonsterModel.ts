@@ -1,8 +1,10 @@
 export type Monster = {
-  name: string;
-  attack: number;
-  defense: number;
-  ability: string;
-  health: number;
-  imageUrl: string;
+	name: string;
+	attack: number;
+	magic: number;
+	defense: number;
+	ability: string;
+	health: number;
+	imageUrl: string;
+	rewardGold: number;
 };
